@@ -642,10 +642,6 @@ video {
   font-family: jet, sans;
 }
 
-.font-scanbold {
-  font-family: scanbold, sans;
-}
-
 .text-\[4\.6rem\] {
   font-size: 4.6rem;
 }
@@ -662,10 +658,6 @@ video {
 
 .font-bold {
   font-weight: 700;
-}
-
-.font-extrabold {
-  font-weight: 800;
 }
 
 .underline {

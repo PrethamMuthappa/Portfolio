@@ -6,10 +6,6 @@
     src: url(dist/fonts/JetBrainsMono-Medium.ttf);
 }
 
-@font-face {
-    font-family: scanbold;
-    src: url(dist/fonts/Scandia-Bold.ttf);
-}
 
 }
 
@@ -56,9 +52,21 @@ body{
     text-justify: inter-word;
 }
 
+#hmtext{
+
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 
 @media only screen and (max-width: 450px) {
     
+   body{
+
+    background-color: aliceblue;
+   }
+
+
     #main_div{
     
         margin-top: 0rem;
@@ -99,9 +107,10 @@ body{
 
     #geekpara{
        margin-left: 0%;
-        width: 500px;
+        width: 400px;
         margin-top:-40px;
         margin-bottom: 0;
+        overflow: hidden;
 
     }
    
@@ -110,13 +119,16 @@ body{
         margin-top: -60px;
         justify-content: center;
         align-content: center;
+        margin-bottom: -100px;
        
 
     }
 
     #geekpic1{
-        width: 400px;
-        height: 400px;
+        width: 380px;
+        margin-top: 80px;
+        height: 250px;
+        margin-bottom: 100px;
         
     }
 
@@ -126,6 +138,37 @@ body{
         margin-left: 0;
     }
     
+
+    #hm{
+        margin: 0%;
+        width: 400px;
+        margin-left: 0;
+        margin-right: 0;
+        
+        margin-bottom: 0;
+    }
+    #hmtext{
+
+      
+    }
+
+    #hmpic{
+      margin-left: 0%;
+      padding: 0;
+        margin-top: 20px;
+        
+    }
+
+    #hmpic1{
+
+        width: 300px;
+        overflow: hidden;
+        height:220px;
+        margin-right: -10px;
+
+    } ;
+
+  
   }
 
 

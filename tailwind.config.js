@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily:{
         custom:['jet','sans'],
-        scanbold:['scanbold','sans']
+        
       }
     },
   },

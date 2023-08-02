@@ -3,7 +3,7 @@ const pro=document.getElementById('pro');
 const arrow=document.getElementById('arrow');
 const logo=document.getElementById('logo');
 const parents=document.getElementById('para');
-const bor=document.getElementById('bor')
+const bor=document.getElementById('bor');
 gsap.registerPlugin('ScrollTrigger');
 
 
