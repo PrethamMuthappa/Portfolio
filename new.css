@@ -1,0 +1,135 @@
+
+@layer base{
+
+@font-face {
+    font-family: jet;
+    src: url(dist/fonts/JetBrainsMono-Medium.ttf);
+}
+
+@font-face {
+    font-family: scanbold;
+    src: url(dist/fonts/Scandia-Bold.ttf);
+}
+
+}
+
+html{
+
+    scroll-behavior: smooth;
+}
+
+body{
+
+    background-color: rgb(240, 227, 240);
+    margin: 0%;
+    padding: 0%;
+}
+
+#parent{
+
+    display: flex;
+   margin-bottom: 10px;
+   margin-top: -20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#imgtext{
+   
+    width: 500px; 
+     
+    margin-top: 50px;
+}
+
+#para{
+  text-align: justify;
+    text-justify: inter-word;
+}
+#event{
+
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#geek{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+@media only screen and (max-width: 450px) {
+    
+    #main_div{
+    
+        margin-top: 0rem;
+
+
+    }
+
+    #arrow{
+
+        width: 200px;
+        height: 200px;
+    }
+
+    #bor{
+
+        border:hidden;
+    }
+
+    #eventpara{
+        margin-left: 0%;
+        width: 500px;
+        margin-top: 50px;
+        margin-bottom: 0;
+    }
+
+    #eventpic{
+        margin-left: 0%;
+        margin-top: -50px;
+        justify-content: center;
+        align-content: center;
+        margin-bottom: 0;
+    }
+
+    #pic{
+        width: 400px;
+        height: 400px;
+    }
+
+    #geekpara{
+       margin-left: 0%;
+        width: 500px;
+        margin-top:-40px;
+        margin-bottom: 0;
+
+    }
+   
+    #geekpic{
+       margin-left: 0%;
+        margin-top: -60px;
+        justify-content: center;
+        align-content: center;
+       
+
+    }
+
+    #geekpic1{
+        width: 400px;
+        height: 400px;
+        
+    }
+
+
+    #img{
+
+        margin-left: 0;
+    }
+    
+  }
+
+
+  
+
+
+  
