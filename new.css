@@ -58,6 +58,11 @@ body{
     text-justify: inter-word;
 }
 
+#hmpic1{
+
+    width: 300px;
+    height: 200px;
+}
 
 @media only screen and (max-width: 450px) {
     
@@ -108,7 +113,7 @@ body{
     #geekpara{
        margin-left: 0%;
         width: 400px;
-        margin-top:-40px;
+        margin-top:-50px;
         margin-bottom: 0;
         overflow: hidden;
 
@@ -142,15 +147,12 @@ body{
     #hm{
         margin: 0%;
         width: 400px;
-        margin-left: 0;
-        margin-right: 0;
+       
+        margin-top: 35px;
         
         margin-bottom: 0;
     }
-    #hmtext{
-
-      
-    }
+   
 
     #hmpic{
       margin-left: 0%;
@@ -161,9 +163,9 @@ body{
 
     #hmpic1{
 
-        width: 300px;
+        width: 350px;
         overflow: hidden;
-        height:220px;
+        height:250px;
         margin-right: -10px;
 
     } ;
