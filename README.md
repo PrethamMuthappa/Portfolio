@@ -1,5 +1,5 @@
-# Fortfolio
-My Fortfolio website created using html , css, TailwindCSS and some simple animation uisng Gsap js
+# Portfolio
+My Portfolio website created using html , css, TailwindCSS and some simple animation uisng Gsap js
 
  <a href="tidersky.netlify.app"><b>website link<b></a>
 
