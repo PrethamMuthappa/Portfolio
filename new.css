@@ -4,6 +4,7 @@
 @font-face {
     font-family: jet;
     src: url(dist/fonts/JetBrainsMono-Medium.ttf);
+    font-display: swap;
 }
 
 
@@ -106,8 +107,10 @@ body{
     }
 
     #pic{
-        width: 400px;
-        height: 400px;
+        width: 407px;
+        margin-top: 80px;
+        height: 250px;
+        margin-bottom: 100px;
     }
 
     #geekpara{
@@ -130,7 +133,7 @@ body{
     }
 
     #geekpic1{
-        width: 380px;
+        width: 407px;
         margin-top: 80px;
         height: 250px;
         margin-bottom: 100px;
@@ -163,7 +166,7 @@ body{
 
     #hmpic1{
 
-        width: 350px;
+        width: 407px;
         overflow: hidden;
         height:250px;
         margin-right: -10px;
