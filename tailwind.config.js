@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        custom:['jet','sans'],
-        scanbold:['scanbold','sans']
+        custom:['jet','mono'],
+        
       }
     },
   },
