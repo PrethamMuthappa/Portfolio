@@ -7,28 +7,7 @@ const bor=document.getElementById('bor');
 gsap.registerPlugin('ScrollTrigger');
 
 
-
-  gsap.fromTo(parents,{
-
-    opacity:0,
-
-  },{
-    opacity:1,
-    delay:0,
-    duration:0.3,
-
-    scrollTrigger: {
-        trigger: parents,
-        start: "bottom bottom",
-        end: "top 100px",
-        //we can use scrub for do the reverse animation when going back 
-        
-        //scrub: true,
-        //id: "scrub"
-      
-      }
-
-  })
+  
 logo.addEventListener('pointerover',()=>{
 
     gsap.to(logo,{rotate:"360deg",yoyo:true,duration:1})
