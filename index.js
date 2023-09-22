@@ -1,13 +1,9 @@
 const stacks=document.getElementById('stack');
-const pro=document.getElementById('pro');
 const arrow=document.getElementById('arrow');
 const logo=document.getElementById('logo');
-const parents=document.getElementById('para');
-const bor=document.getElementById('bor');
-gsap.registerPlugin('ScrollTrigger');
 
 
-  
+
 logo.addEventListener('pointerover',()=>{
 
     gsap.to(logo,{rotate:"360deg",yoyo:true,duration:1})

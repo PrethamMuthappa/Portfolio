@@ -71,8 +71,14 @@ body{
 
     background-color:rgb(242, 238, 242);
    }
-
-
+   
+   #logo{
+    margin-left: -10px;
+    margin-top: 10px;
+    height: 100px;
+    width: 100px;
+   }
+   
     #main_div{
     
         margin-top: 0rem;
