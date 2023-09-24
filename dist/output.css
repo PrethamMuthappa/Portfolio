@@ -617,10 +617,6 @@ video {
   flex-grow: 1;
 }
 
-.resize {
-  resize: both;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -715,7 +711,21 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:hidden {
-    display: none;
+  .sm\:text-\[4\.0rem\] {
+    font-size: 4.0rem;
+  }
+
+  .sm\:text-\[1\.0rem\] {
+    font-size: 1.0rem;
+  }
+
+  .sm\:text-\[\] {
+    color: ;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:text-\[1\.0rem\] {
+    font-size: 1.0rem;
   }
 }
