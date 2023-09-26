@@ -517,10 +517,6 @@ video {
   float: left;
 }
 
-.m-4 {
-  margin: 1rem;
-}
-
 .m-3 {
   margin: 0.75rem;
 }
@@ -605,16 +601,20 @@ video {
   margin-top: 0.5rem;
 }
 
+.ml-\[-10px\] {
+  margin-left: -10px;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
 
-.flex {
-  display: flex;
+.ml-\[-13px\] {
+  margin-left: -13px;
 }
 
-.h-3 {
-  height: 0.75rem;
+.flex {
+  display: flex;
 }
 
 .w-\[800px\] {
