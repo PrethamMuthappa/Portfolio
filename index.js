@@ -1,13 +1,5 @@
 const stacks=document.getElementById('stack');
 const arrow=document.getElementById('arrow');
-const logo=document.getElementById('logo');
-
-
-
-logo.addEventListener('pointerover',()=>{
-
-    gsap.to(logo,{rotate:"360deg",yoyo:true,duration:1})
-})
 
 arrow.addEventListener('pointerover',()=>{
 
