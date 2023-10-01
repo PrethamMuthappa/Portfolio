@@ -601,16 +601,12 @@ video {
   margin-top: 0.5rem;
 }
 
-.ml-\[-10px\] {
-  margin-left: -10px;
+.ml-\[-13px\] {
+  margin-left: -13px;
 }
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.ml-\[-13px\] {
-  margin-left: -13px;
 }
 
 .flex {
