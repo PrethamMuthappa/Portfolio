@@ -1,0 +1,32 @@
+[
+	{
+		"name": "Secure cipher",
+		"description": "A simple self hosted password manager for linux - written in rust.",
+		"repository": "PrethamMuthappa/secure-cipher"
+	},
+	{
+		"name": "Sys-Monitor",
+		"description": "A basic system monitor for linux.",
+		"repository": "PrethamMuthappa/Sys-Monitor"
+	},
+	{
+		"name": "user activity",
+		"description": "A simple user web activity tracker built using apache kafka and springboot",
+		"repository": "PrethamMuthappa/user-activity"
+	},
+	{
+		"name": "Spring-security-jwt",
+		"description": "Implementing secure auth in spring security.",
+		"repository": "PrethamMuthappa/Spring-Security-JWT"
+	},
+	{
+		"name": "Snapcrawler",
+		"description": "Web scrapper tool used to scrape entire images from any web site of your choice.",
+		"repository": "PrethamMuthappa/snapcrawler"
+	},
+	{
+		"name": "EventHive",
+		"description": "Concert/event management database built using python and flask .",
+		"repository": "PrethamMuthappa/EventHive"
+	}
+]

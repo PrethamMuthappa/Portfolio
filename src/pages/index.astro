@@ -1,0 +1,104 @@
+---
+import Layout from "@components/Layout.astro";
+import projects from "../projects.json";
+---
+
+<Layout title="Pretham Muthappa" description="Pretham's personal website">
+	<h1 class="mb-3 text-3xl font-semibold">Hi, I'm Pretham</h1>
+	<p class="text-zinc-800">
+		I work mostly on Backend Development and building production grade API's and software, I have also built Linux desktop tools using Rust and Java. Other than coding I enjoy playing games.
+	</p>
+	<p class="mt-4 text-zinc-800">Feel free to connect with me on Twitter or linkedin!</p><br/>
+	<section class="mt-4">
+		<h2 class="mb-2 text-2xl font-semibold">Projects</h2>
+		<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+			{
+				projects.map((project) => {
+					return (
+						<article class="group rounded-md border px-4 pb-3  pt-2">
+							<a href={new URL(project.repository, "https://github.com")} class="block">
+								<h3 class="w-fit group-hover:text-main group-hover:underline">{project.name}</h3>
+								<p class=" text-sm text-zinc-500">{project.description}</p>
+							</a>
+						</article>
+					);
+				})
+			}
+		</div>
+	</section>
+
+	<section>
+			<section class="space-y-8">
+				<div class="mt-10">
+
+					<h1 class="text-2xl font-bold tracking-tight">Work Experience</h1>
+					<p class="text-muted-foreground">A summary of my professional history.</p>
+				</div>
+				<div class="space-y-6">
+					<div class="grid gap-4">
+						<div class="flex items-center justify-between">
+							<div>
+								<h3 class="text-lg font-semibold">Java/spring boot Developer Intern</h3>
+								<p class="text-muted-foreground">Incture | Jan 2024 - Aug 2024</p>
+							</div>
+						</div>
+						<p class="text-muted-foreground">
+							Engineered and validated robust RESTful APIs using Spring Boot for seamless user authentication and
+							authorization, leveraging Hibernate for optimized data persistence in MySQL.
+						</p>
+					</div>
+					<div class="grid gap-4">
+						<div class="flex items-center justify-between">
+							<div>
+								<h3 class="text-lg font-semibold">Backend Developer intern</h3>
+								<p class="text-muted-foreground">WNE3 Technologies | Aug 2023 - Oct 2023</p>
+							</div>
+						</div>
+						<p class="text-muted-foreground">
+							Contributed significantly to the enhancement of a web3-driven e-commerce platform, focusing on optimizing user
+							experience and integrating advanced technologies.
+						</p>
+					</div>
+				</div>
+			</section>
+	</section>
+	<section>
+		<h1 class="mb-2 text-2xl font-semibold mt-10">Tech & Tools</h1>
+		<div class="p-4">
+			<!-- Languages Section -->
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold mb-2">Languages</h2>
+				<ul class="list-disc list-inside ml-4">
+					<li>Java: Currently using it for building web apps with SpringBoot </li>
+					<li>Javascript: I use React for frontend, Node and express for Backend</li>
+					<li>Rust: To build CLI tool and GUI for linux</li>
+					<li>MySql: My go-to relational database</li>
+					<li>MongoDB: My go-to NoSql database</li>
+				</ul>
+			</div>
+
+			<!-- Tools Section -->
+			<div>
+				<h2 class="text-lg font-semibold mb-2">Tools</h2>
+				<ul class="list-disc list-inside ml-4">
+					<li>Git: My file storage</li>
+					<li>Intellij Idea: Life saver for a Java dev</li>
+					<li>Docker: Good but Overkill</li>
+					<li>Dbeaver: Fancy Mysql viewer</li>
+					<li>Postman: Essentials</li>
+				</ul>
+			</div>
+
+			<p class="mt-7">Other than these I do use many other frameworks and libraries </p>
+		</div>
+	</section>
+
+	<section class="mt-7">
+		<footer class="bg-muted py-6 w-full">
+			<div class="container max-w-7xl flex flex-col items-center gap-4 md:flex-row md:justify-between">
+				<p class="text-xs ml-auto mr-auto text-muted-foreground">&copy; 2024 Pretham Muthappa B S.</p>
+				<p class="text-xs text-muted-foreground"> <a href="https://pvukxdtn47lwu9om.public.blob.vercel-storage.com/PrethamMuthappaBS-mmsuBN1ZKQERkJGv6w2Df6C3xsyuqT.pdf">View Resume </a> </p>
+			</div>
+		</footer>
+	</section>
+</Layout>

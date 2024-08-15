@@ -1,0 +1,90 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	ogId?: string;
+}
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={Astro.props.description} />
+		<title>{Astro.props.title}</title>
+		<link rel="preconnect" href="/" crossorigin />
+		<link rel="preload" href="/profile.png" as="image" />
+		<link rel="icon" href="/profile.png" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="Pretham"
+			href={`${Astro.site}rss.xml`}
+		/>
+
+		<!-- OpenGraph tags -->
+		<meta name="og:title" content={Astro.props.title} />
+		<meta property="og:title" content={Astro.props.title} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="en" />
+		<meta property="og:description" content={Astro.props.description} />
+		<meta property="og:site_name" content="Pretham" />
+		<meta property="og:url" content="https://tidersky.me" />
+		<meta property="og:image" content="https://tidersky.me/profile.png" />
+
+		<!-- Twitter tags -->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@PrethamBachira" />
+		<meta name="twitter:title" content={Astro.props.title} />
+		<meta name="twitter:description" content={Astro.props.description} />
+
+		<!-- Discord -->
+		<meta name="theme-color" content="#7575ff" />
+	</head>
+	<body class="mx-auto max-w-3xl px-4 min-h-screen text-zinc-800">
+		<header class="flex place-content-between place-items-center pb-2 pt-6">
+			<a class="block" href="/">
+				<img
+					src="/profile.png"
+					alt="profile picture"
+					class="h-8 w-8 bg-zinc-100 transition-transform duration-200 ease-in-out hover:scale-110 sm:h-10 sm:w-10"
+				/></a
+			>
+			<div class="flex gap-x-4 text-zinc-800">
+				<a href="https://github.com/PrethamMuthappa" class="hover:text-main hover:underline"
+					><img src="/github.svg"/></a>
+
+				<a href="https://x.com/PrethamBachira" class="hover:text-main hover:underline"
+					><img src="/twitter.svg"/></a
+				>
+
+				<a href="https://www.linkedin.com/in/pretham-muthappa-b-s-602340231/" class="hover:text-main hover:underline"
+					><img src="/linkedin.svg"/></a>
+
+				<a href="mailto:prethambachira1819@gmail.com" class="hover:text-main hover:underline"
+				><img src="/gmail.svg"/></a>
+
+			</div>
+		</header>
+		<main class="pb-32 pt-8 leading-relaxed sm:pt-12">
+			<slot />
+		</main>
+	</body>
+	<style>
+		html {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+				sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		}
+		code {
+			font-family:
+				ui-monospace,
+				SFMono-Regular,
+				SF Mono,
+				Menlo,
+				Consolas,
+				Liberation Mono,
+				monospace;
+		}
+	</style>
+</html>
