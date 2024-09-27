@@ -1,3 +1,3 @@
 # Personal website
 
-Built with Astro - [link](https://tidersky.me)
+Built with Astro - [link](https://prethambachira.vercel.app/)
