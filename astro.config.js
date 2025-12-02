@@ -9,6 +9,6 @@ export default defineConfig({
 	adapter: vercel({
  		webAnalytics: { enabled: true }
 	}),
-	site: "https://tidersky.me"
+	site: "https://prethambachira.vercel.app"
 });
 

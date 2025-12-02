@@ -41,6 +41,12 @@ interface Props {
 
 		<!-- Discord -->
 		<meta name="theme-color" content="#7575ff" />
+
+		<!-- Inter font -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+		/>
 	</head>
 	<body class="mx-auto max-w-3xl px-4 min-h-screen text-zinc-800">
 		<header class="flex place-content-between place-items-center pb-2 pt-6">
@@ -73,9 +79,30 @@ interface Props {
 	</body>
 	<style>
 		html {
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-				sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+			font-family: "Inter", -apple-system, BlinkMacSystemFont;
+			font-size: 15px;
+			line-height: 1.6;
+			font-weight: 400;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
 		}
+
+		body {
+			color: #111827;
+		}
+
+		h1,
+		h2,
+		h3 {
+			letter-spacing: -0.03em;
+		}
+
+		a {
+			color: #2563eb;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+
 		code {
 			font-family:
 				ui-monospace,
