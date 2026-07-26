@@ -1,14 +1,29 @@
 [
+
 	{
-		"name": "Secure Cipher",
-		"description": "A simple self hosted password manager for Linux - written in Rust.",
-		"repository": "PrethamMuthappa/secure-cipher"
+		"name": "SIEM Honeypot Home Lab",
+		"description": "A cloud-hosted cybersecurity home lab using Cowrie, Splunk, and OCI to collect, analyze, and visualize SSH honeypot attack data.",
+		"repository": "PrethamMuthappa/SIEM-Honeypot-Home-Lab"
 	},
+
 	{
 		"name": "Sys-Monitor",
-		"description": "A basic system monitor for Linux. written in Rust",
+		"description": "A basic system monitor for Linux. Written in Rust",
 		"repository": "PrethamMuthappa/Sys-Monitor"
 	},
+
+	{
+		"name": "Secure Cipher",
+		"description": "A simple self hosted password manager for Linux. Written in Rust.",
+		"repository": "PrethamMuthappa/secure-cipher"
+	},
+
+	{
+		"name": "Log-IT",
+		"description": "An AI-powered changelog generator built with Java and Spring.",
+		"repository": "PrethamMuthappa/Log-IT"
+	},
+
 	{
 		"name": "User Activity",
 		"description": "A simple user web activity tracker built using Apache Kafka and Spring Boot",
@@ -18,15 +33,5 @@
 		"name": "Spring-Security-JWT",
 		"description": "Implementing secure authentication using Spring Security.",
 		"repository": "PrethamMuthappa/Spring-Security-JWT"
-	},
-	{
-		"name": "Snapcrawler",
-		"description": "Web scraper tool used to scrape entire images from any website of your choice.",
-		"repository": "PrethamMuthappa/snapcrawler"
-	},
-	{
-		"name": "EventHive",
-		"description": "Concert/event management database built using Python and Flask .",
-		"repository": "PrethamMuthappa/EventHive"
 	}
 ]
