@@ -1,0 +1,26 @@
+---
+import Layout from "@components/Layout.astro";
+const posts = await Astro.glob("./*.md");
+const visible = posts
+  .filter((p) => !p.frontmatter.draft)
+  .sort((a, b) => +new Date(b.frontmatter.date ?? 0) - +new Date(a.frontmatter.date ?? 0));
+---
+<Layout title="Blog — Pretham Muthappa" description="Tech blog by Pretham Muthappa">
+  <a href="/" style="text-decoration:none" class="text-sm hover:underline">← Home</a>
+  <h1 class="mb-2 mt-4 text-3xl font-semibold">Blog.</h1>
+  <p class="mb-8 text-zinc-600">Notes on cloud, security, homelabs and automation.</p>
+  <div class="space-y-4">
+    {visible.map((post) => (
+      <article class="rounded-md border px-4 pb-3 pt-3">
+        <a href={post.url} style="text-decoration:none;color:inherit" class="block">
+          <h2 class="text-xl font-semibold hover:underline">{post.frontmatter.title}</h2>
+          <p class="mt-1 text-sm text-zinc-500">
+            {post.frontmatter.date && new Date(post.frontmatter.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+            {post.frontmatter.tags?.length ? ` • ${post.frontmatter.tags.join(", ")}` : ""}
+          </p>
+          {post.frontmatter.description && <p class="mt-2 text-zinc-700">{post.frontmatter.description}</p>}
+        </a>
+      </article>
+    ))}
+  </div>
+</Layout>

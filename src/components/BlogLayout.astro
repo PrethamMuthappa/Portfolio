@@ -1,0 +1,46 @@
+---
+import Layout from "./Layout.astro";
+interface Props {
+  frontmatter: {
+    title: string;
+    date?: string;
+    tags?: string[];
+    description?: string;
+  };
+}
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title} description={frontmatter.description ?? frontmatter.title}>
+  <a href="/blog" class="text-sm no-underline hover:underline" style="text-decoration:none">← Back to blog</a>
+  <h1 class="mb-2 mt-4 text-3xl font-bold tracking-tight">{frontmatter.title}</h1>
+  {frontmatter.date && (
+    <p class="mb-2 text-sm text-zinc-500">
+      {new Date(frontmatter.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+      {frontmatter.tags?.length ? ` • ${frontmatter.tags.join(", ")}` : ""}
+    </p>
+  )}
+  <hr class="my-6" />
+  <article class="blog-content">
+    <slot />
+  </article>
+</Layout>
+
+<style is:global>
+  .blog-content { line-height: 1.75; color: #27272a; }
+  .blog-content h2 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 0.75rem; letter-spacing: -0.02em; }
+  .blog-content h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+  .blog-content p { margin: 1rem 0; }
+  .blog-content ul, .blog-content ol { margin: 1rem 0; padding-left: 1.5rem; }
+  .blog-content ul { list-style: disc; }
+  .blog-content ol { list-style: decimal; }
+  .blog-content li { margin: 0.35rem 0; }
+  .blog-content pre { background: #18181b; color: #e4e4e7; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 1rem 0; font-size: 0.85rem; }
+  .blog-content code { font-size: 0.85em; }
+  .blog-content :not(pre) > code { background: #f4f4f5; padding: 0.15rem 0.4rem; border-radius: 0.3rem; }
+  .blog-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  .blog-content th, .blog-content td { border: 1px solid #e4e4e7; padding: 0.5rem 0.75rem; text-align: left; }
+  .blog-content th { background: #f4f4f5; font-weight: 600; }
+  .blog-content blockquote { border-left: 3px solid #10b981; padding-left: 1rem; color: #52525b; margin: 1rem 0; }
+  .blog-content hr { margin: 2rem 0; }
+  .blog-content img { border-radius: 0.5rem; margin: 1rem 0; }
+</style>
