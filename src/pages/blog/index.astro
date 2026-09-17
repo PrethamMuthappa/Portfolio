@@ -1,6 +1,6 @@
 ---
 import Layout from "@components/Layout.astro";
-const posts = await Astro.glob("./*.md");
+const posts = Object.values(import.meta.glob("./*.md", { eager: true }));
 const visible = posts
   .filter((p) => !p.frontmatter.draft)
   .sort((a, b) => +new Date(b.frontmatter.date ?? 0) - +new Date(a.frontmatter.date ?? 0));
@@ -11,7 +11,7 @@ const visible = posts
   <p class="mb-8 text-zinc-600">Notes on cloud, security, homelabs and automation.</p>
   <div class="space-y-4">
     {visible.map((post) => (
-      <article class="rounded-md border px-4 pb-3 pt-3">
+      <article class="rounded-md border border-zinc-200 px-4 pb-3 pt-3">
         <a href={post.url} style="text-decoration:none;color:inherit" class="block">
           <h2 class="text-xl font-semibold hover:underline">{post.frontmatter.title}</h2>
           <p class="mt-1 text-sm text-zinc-500">

@@ -1,14 +1,14 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import vercel from '@astrojs/vercel/serverless';
-
+import tailwindcss from "@tailwindcss/vite";
+import vercel from "@astrojs/vercel";
 
 export default defineConfig({
-	integrations: [tailwind()],
-	output: 'server',
+	vite: {
+		plugins: [tailwindcss()]
+	},
+	output: "server",
 	adapter: vercel({
  		webAnalytics: { enabled: true }
 	}),
 	site: "https://prethambachira.vercel.app"
 });
-
