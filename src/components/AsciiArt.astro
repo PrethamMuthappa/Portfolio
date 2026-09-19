@@ -1,0 +1,226 @@
+---
+// ASCII art animation component
+// Cyberpunk / terminal city skyline themed — uses the site's main color (#6161ff)
+---
+
+<div class="ascii-art-container" aria-hidden="true">
+  <canvas id="ascii-canvas"></canvas>
+</div>
+
+<style>
+  .ascii-art-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2.5rem;
+    /* subtle top border so it reads as a "terminal window" footer */
+    border-top: 1px solid #e4e4e7;
+    padding-top: 1.25rem;
+  }
+
+  #ascii-canvas {
+    display: block;
+    width: 100%;
+    /* crisp pixel font rendering */
+    image-rendering: pixelated;
+  }
+</style>
+
+<script>
+  (function () {
+    const canvas = document.getElementById("ascii-canvas") as HTMLCanvasElement;
+    if (!canvas) return;
+
+    // ─── Config ──────────────────────────────────────────────────────────────
+    const FONT_SIZE   = 11;          // px — monospace cell height
+    const FONT_FACE   = '"Courier New", Courier, monospace';
+    const COL_MAIN    = "#6161ff";   // site main color
+    const COL_DIM     = "#a0a0ff";   // lighter tint for secondary chars
+    const COL_ACCENT  = "#10b981";   // emerald accent (SOC / security theme)
+    const COL_WARN    = "#f87171";   // red accent
+    const COL_BG      = "#ffffff";   // page background
+    const FPS         = 14;          // animation frame rate
+
+    // ─── ASCII art frames (3 horizontal layers) ───────────────────────────────
+    // Layer 0: sky / status bar  (scrolls left slowly)
+    // Layer 1: cityscape / mid   (static)
+    // Layer 2: ground / scanline (scanline blink effect)
+
+    const SKYLINE_FRAMES = [
+      // Each string is one full line — will be tiled & scrolled
+      "  .  *   . ·  ★  ·   .  *      .   ·  *  ★  .   ·  *    .  ·  ★    .  *  ·     .  ★  ·  .  *  ",
+      "  ·    .   *   ·    ★   .    ·   *    .   ·   ★    .   *   ·     .   ★   ·    *  .    ·   *  .  ",
+    ];
+
+    // The city — wide flat-roofed buildings, server racks, antennas, water towers
+    // Key rule: every building has wide horizontal mass, never taller than it is wide
+    const CITY_ART = [
+      "                ¦           /\\                                    _____                           ",
+      "   _   _        ¦          /  \\          ___                    |     |    _                     ",
+      "  |_| |_|  ___  ¦  ___    / /\\ \\   _____|  |____    ________   |     |___|_|___    ____          ",
+      "  | | | | |   | ¦ |   |  /___  _\\ |  ___|  |___ |  |   ____|  |           |   |  |    |  ___   ",
+      "  |_|_|_| |   | ¦ |   | |░░░░||░░||░░░░|  |░░░░|  |  |░░░░|  |░░░░░░░░░░░|░░░|  |░░░░| |░░░|  ",
+      " ░░░░░░░░ |▓▓▓| ¦ |▓▓▓| |░░░░||░░||░░░░|  |░░░░|  |  |░░░░|  |░░░░░░░░░░░|░░░|  |░░░░| |░░░|  ",
+      " ░░░░░░░░ |▓▓▓| ¦ |▓▓▓| |▓▓▓▓||▓▓||▓▓▓▓|  |▓▓▓▓|  |  |▓▓▓▓|  |▓▓▓▓▓▓▓▓▓▓▓|▓▓▓|  |▓▓▓▓| |▓▓▓|  ",
+      "─────────┴─────┴─┴─────┴─┴────┴┴──┴┴────┴──┴────┴──┴──┴────┴──┴───────────┴───┴──┴────┴─┴───┴──",
+    ];
+
+    // Ground / scan rows — cycling log-style text
+    const LOG_LINES = [
+      "[sys]  kernel: 6.8.0-51-generic  #52-Ubuntu  SMP  PREEMPT_DYNAMIC",
+      "[net]  eth0: link up 1000Mbps full-duplex  txqueuelen=1000",
+      "[sec]  sshd: Accepted publickey for pretham from 10.0.0.1 port 52841",
+      "[inf]  docker: container 3f9a1c2b started  image=nginx:alpine",
+      "[ok ]  systemd: Started Hermes Agent  (hermes-agent.service)",
+      "[sec]  ufw: ALLOW IN  tcp  dpt:443  src=0.0.0.0/0",
+      "[sys]  CPU: 4×AMD EPYC  mem: 7.8GiB/16GiB  load: 0.42 0.38 0.31",
+      "[net]  resolved: oci.pretham.internal → 10.0.10.5",
+      "[ok ]  nginx: configuration test OK  signal=reload",
+      "[sec]  fail2ban: Ban 192.168.1.101  (sshd after 5 failures)",
+    ];
+
+    // ─── State ────────────────────────────────────────────────────────────────
+    let frame       = 0;
+    let skyOffset   = 0;
+    let logIndex    = 0;
+    let logProgress = 0; // characters revealed so far (typewriter)
+    let lastTs      = 0;
+
+    // ─── Sizing ───────────────────────────────────────────────────────────────
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      const cssW = canvas.parentElement!.clientWidth;
+      // rows: 2 sky + city lines + 1 separator + 2 log rows
+      const rows = 2 + CITY_ART.length + 1 + 2;
+      const cssH = rows * FONT_SIZE * 1.35;
+      canvas.style.width  = cssW + "px";
+      canvas.style.height = cssH + "px";
+      canvas.width  = Math.round(cssW * dpr);
+      canvas.height = Math.round(cssH * dpr);
+    }
+
+    // ─── Draw ─────────────────────────────────────────────────────────────────
+    function draw(ts: number) {
+      if (ts - lastTs < 1000 / FPS) {
+        requestAnimationFrame(draw);
+        return;
+      }
+      lastTs = ts;
+      frame++;
+
+      const dpr  = window.devicePixelRatio || 1;
+      const ctx  = canvas.getContext("2d")!;
+      const W    = canvas.width;
+      const H    = canvas.height;
+      const cellH = FONT_SIZE * 1.35 * dpr;
+      const cellW = FONT_SIZE * 0.62 * dpr;  // monospace approx
+      const cols  = Math.ceil(W / cellW) + 4;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.font = `${FONT_SIZE * dpr}px ${FONT_FACE}`;
+      ctx.textBaseline = "top";
+
+      // helper: draw a full-width tiled string with horizontal offset
+      function drawRow(
+        y: number,
+        src: string,
+        color: string,
+        offsetPx: number = 0,
+        alpha: number = 1
+      ) {
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle   = color;
+        const tiled = (src + src + src + src).slice(0, cols + 4);
+        const xStart = -(offsetPx % (src.length * cellW));
+        ctx.fillText(tiled, xStart, y);
+      }
+
+      // ── Row 0-1: scrolling starfield / sky ──
+      const skyAlpha = 0.35 + 0.1 * Math.sin(frame * 0.08);
+      drawRow(0,        SKYLINE_FRAMES[0], COL_DIM, skyOffset * 0.7, skyAlpha);
+      drawRow(cellH,    SKYLINE_FRAMES[1], COL_MAIN, skyOffset * 0.5, skyAlpha * 0.7);
+
+      // ── Rows 2…N: city silhouette ──
+      CITY_ART.forEach((line, i) => {
+        const y = (2 + i) * cellH;
+        // buildings fade: bottom rows are full color, top rows dimmer
+        const fade = 0.5 + 0.5 * (i / (CITY_ART.length - 1));
+        // alternate building chars between main and dim for depth
+        ctx.globalAlpha = fade;
+        const chars = line.split("");
+        let x = 0;
+        for (const ch of chars) {
+          if (ch !== " ") {
+            // color logic: heavy fill = main, light fill = dim, structural = accent
+            if (ch === "▓") {
+              ctx.fillStyle = COL_MAIN;
+            } else if (ch === "░") {
+              ctx.fillStyle = COL_DIM;
+            } else if (ch === "─" || ch === "┴" || ch === "─") {
+              ctx.fillStyle = COL_ACCENT;
+            } else {
+              ctx.fillStyle = COL_MAIN;
+            }
+            ctx.fillText(ch, x, y);
+          }
+          x += cellW;
+        }
+      });
+
+      // ── Separator line ──
+      const sepY = (2 + CITY_ART.length) * cellH;
+      ctx.globalAlpha = 0.4;
+      ctx.fillStyle   = COL_ACCENT;
+      ctx.fillText("─".repeat(cols), 0, sepY);
+
+      // ── Log rows: typewriter effect ──
+      ctx.globalAlpha = 1;
+      const logY1 = sepY + cellH;
+      const logY2 = logY1 + cellH;
+
+      // current line (typewriter)
+      const curLine  = LOG_LINES[logIndex % LOG_LINES.length];
+      const prevLine = LOG_LINES[(logIndex - 1 + LOG_LINES.length) % LOG_LINES.length];
+
+      // previous line faded
+      ctx.globalAlpha = 0.45;
+      ctx.fillStyle   = COL_DIM;
+      ctx.fillText(prevLine, 0, logY1);
+
+      // current line — characters revealed progressively
+      logProgress += 2.2; // chars per frame
+      if (logProgress >= curLine.length + 10) {
+        logProgress = 0;
+        logIndex    = (logIndex + 1) % LOG_LINES.length;
+      }
+      const revealed = Math.min(Math.floor(logProgress), curLine.length);
+      const partial  = curLine.slice(0, revealed);
+
+      ctx.globalAlpha = 1;
+      // color the prefix tag differently
+      if (partial.startsWith("[sec]")) {
+        ctx.fillStyle = COL_WARN;
+      } else if (partial.startsWith("[ok ]")) {
+        ctx.fillStyle = COL_ACCENT;
+      } else {
+        ctx.fillStyle = COL_MAIN;
+      }
+      ctx.fillText(partial, 0, logY2);
+
+      // blinking cursor
+      if (revealed < curLine.length && Math.floor(frame / 4) % 2 === 0) {
+        ctx.fillStyle = COL_MAIN;
+        ctx.fillText("█", revealed * cellW, logY2);
+      }
+
+      // advance sky scroll
+      skyOffset += 0.25;
+
+      requestAnimationFrame(draw);
+    }
+
+    // ─── Init ─────────────────────────────────────────────────────────────────
+    resize();
+    window.addEventListener("resize", resize);
+    requestAnimationFrame(draw);
+  })();
+</script>
